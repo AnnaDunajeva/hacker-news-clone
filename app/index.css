@@ -1,0 +1,175 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease;
+}
+body {
+    font-family: 'Public Sans', sans-serif;
+    background: #f8f8f8;
+    color: #252525;
+}
+.main-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 50px 15px;
+}
+.dark {
+    color: #DADADA;
+    background: #1c2022;
+    min-height: 100vh;
+  }
+.header-light {
+    color: #bd333e;
+}
+.header-dark {
+    color:  #e6e0e0;
+}
+.padding-left {
+    padding-left: 20px;
+}
+.padding-bottom {
+    padding-bottom: 20px;
+}
+.row {
+    display: flex;
+    align-items: center;
+}
+.nav {
+    padding-bottom: 40px;
+}
+.space-between {
+    justify-content: space-between;
+}
+ul {
+    padding: 0;
+}
+li {
+    list-style-type: none;
+}
+.nav-link {
+    font-size: 25px;
+    font-weight: 900;
+    text-decoration: none;
+    color: inherit;
+    padding-right: 15px;
+  }
+.post-li {
+    padding-bottom: 20px;
+}
+.post-link {
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    /* padding-bottom: 10px; */
+}
+.post-meta {
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(119, 119, 119);
+    margin-bottom: 10px;
+}
+.score {
+    margin-right: 25px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(119, 119, 119);
+}
+/* .small-text-light {
+    color: rgb(119, 119, 119);
+}
+.small-text-dark {
+    color: rgb(105, 102, 102);
+} */
+.meta-link-light {
+    color: rgb(70, 69, 69);
+}
+.meta-link-dark {
+    color: rgb(158, 148, 148);
+}
+.comment {
+    border-radius: 5px;
+    padding: 20px 40px;
+    margin: 10px 0;
+}
+.comment-text {
+    padding-top: 10px;
+    font-size: 17px;
+    line-height: 1.4em;
+}
+.comment-text p {
+    padding: 10px 0;
+}
+.bg-light {
+    background: #eceaea;
+}
+.bg-dark {
+    background: #292828;
+}
+.more-comments {
+    padding-left: 30px;
+}
+.display-comments-btn {
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+.comments-btn-text {
+    font-size: 16px;
+    font-weight: 500;
+    padding-left: 10px;
+}
+/* ======================TOGGLE SWITCH================================================== */
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 10px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+    background-color: rgb(156, 149, 149);
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #f5f6f8;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+    background-color: rgb(36, 34, 34);
+  }
+  /* ======================================================================== */

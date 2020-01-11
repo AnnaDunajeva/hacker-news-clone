@@ -1,0 +1,4 @@
+dist
+#for those on mac
+.DS_Store 
+node_modules
