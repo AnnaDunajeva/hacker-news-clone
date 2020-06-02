@@ -103,6 +103,8 @@ li {
     padding-top: 10px;
     font-size: 17px;
     line-height: 1.4em;
+    white-space: pre-line;
+    overflow-wrap: break-word;
 }
 .comment-text p {
     padding: 10px 0;
