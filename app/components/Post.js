@@ -42,7 +42,7 @@ class Post extends React.Component {
                     :error
                         ?<div>error</div>
                         :<React.Fragment>
-                            <PostHeader post={post} fontSize='30px' fontWeight='900'/>
+                            <PostHeader post={post} additionalClassName={'header-large'}/>
                             <PostMetaInfo post={post}/>
                             {post.text && <p dangerouslySetInnerHTML={{__html: post.text}} className='comment-text'/>}
                             {post.descendants

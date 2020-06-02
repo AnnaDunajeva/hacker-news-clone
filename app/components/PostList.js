@@ -15,7 +15,7 @@ class PostList extends React.Component {
                             <div className='row'>
                                 <div className='score'>{post.score} <br/>{post.score === 1 ?'point':'points'}</div>
                                 <div>
-                                    <PostHeader post={post} fontSize='22px' fontWeight='700'/>
+                                    <PostHeader post={post} additionalClassName={'header-medium'} fontSize='22px' fontWeight='700'/>
                                     <PostMetaInfo post={post}/>
                                 </div>
                             </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {fetchStories, fetchPosts, fetchStoriesIds} from '../utils/api.js'
+import {fetchPosts, fetchStoriesIds} from '../utils/api.js'
 import Loading from './Loading.js'
 import PostList from './PostList.js'
 import InfiniteScrollUtil from './InfiniteScrollUtil'

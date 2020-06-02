@@ -57,7 +57,7 @@ class User extends React.Component {
                                 </div>
                             </div>
                             {about && <p dangerouslySetInnerHTML={{__html: about}} className='comment-text padding-bottom'/>}
-                            <h2 className='post-link' style={{fontSize: '30px'}}>Posts</h2>
+                            <h2 className='post-link header-large'>Posts</h2>
                             {submitted !== 0 
                                 ?<InfiniteScrollUtil
                                     fetchAmount = {50}
