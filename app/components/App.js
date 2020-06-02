@@ -7,6 +7,7 @@ import New from './New.js'
 import Post from './Post.js'
 import User from './User.js'
 import Best from './Best.js'
+import {BASE_URL} from '../utils/constants'
 
 class App extends React.Component {
     static contextType = ThemeContext;
@@ -14,7 +15,7 @@ class App extends React.Component {
         const {isLight} = this.context;
         const theme = isLight ? 'light' : 'dark';
         return (
-            <Router>
+            <Router basename={BASE_URL}>
                 <div className = {theme}>
                     <div className='main-page'>
                         <Nav/>
