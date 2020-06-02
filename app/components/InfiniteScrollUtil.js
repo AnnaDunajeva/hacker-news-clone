@@ -1,7 +1,6 @@
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Loading from './Loading.js'
-import {removeDeadAndDeleted} from '../utils/api'
 
 class InfiniteScrollUtil extends React.Component {
     constructor(props) {
