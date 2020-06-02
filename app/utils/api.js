@@ -1,4 +1,7 @@
-const api = 'https://hacker-news.firebaseio.com/v0/'
+import {API_URL} from './constants'
+
+const api = API_URL
+
 const fetchStories = (type, signal) => {
     const endpoint = window.encodeURI(`${api}${type}stories.json?print=pretty`)
     return fetch(endpoint, {signal})

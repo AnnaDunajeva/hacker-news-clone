@@ -6,11 +6,12 @@ class ThemeContextProvider extends React.Component {
     constructor (props) {
         super (props);
         this.state = {
-            isLight: true
+            isLight: localStorage.getItem('theme') === 'light' ? true : false
         }
         this.toggleTheme = this.toggleTheme.bind(this)
     }
     toggleTheme() {
+        localStorage.setItem('theme', this.state.isLight ? 'dark' : 'light')
         this.setState({
             isLight: !this.state.isLight
         })

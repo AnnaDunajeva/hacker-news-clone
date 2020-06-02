@@ -7,7 +7,6 @@ import New from './New.js'
 import Post from './Post.js'
 import User from './User.js'
 import Best from './Best.js'
-import {BASE_URL} from '../utils/constants' 
 
 class App extends React.Component {
     static contextType = ThemeContext;
@@ -20,11 +19,11 @@ class App extends React.Component {
                     <div className='main-page'>
                         <Nav/>
                         <Switch>
-                            <Route exact path={`${BASE_URL}`} component={Top}/>
-                            <Route path={`${BASE_URL}/new`} component={New}/>
-                            <Route path={`${BASE_URL}/best`} component={Best}/>
-                            <Route path={`${BASE_URL}/post`} component={Post}/>
-                            <Route path={`${BASE_URL}/user`} component={User}/>
+                            <Route exact path='/' component={Top}/>
+                            <Route path='/new' component={New}/>
+                            <Route path='/best' component={Best}/>
+                            <Route path='/post' component={Post}/>
+                            <Route path='/user' component={User}/>
                             <Route render={()=>(<h1>404 Not Found</h1>)} />
                         </Switch>
                     </div>

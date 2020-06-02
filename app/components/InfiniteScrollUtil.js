@@ -28,21 +28,17 @@ class InfiniteScrollUtil extends React.Component {
     }
 
     fetchData () {
-        console.log('running fetch data')
         const {fetchStart, dataAmountFetchedThrougFetchLoop} = this.state;
         const {fetchAmount, ids, fetchFunc} = this.props;
-        console.log('dataAmountFetchedThrougFetchLoop: ', dataAmountFetchedThrougFetchLoop)
 
         let idsToFetch = []
         if (fetchStart >= ids.length || fetchStart > 750) { //limit amount of fetching
-            console.log('nothing more to fetch')
             this.setState({
                 hasMore: false
             })
             return;
         }
         if (dataAmountFetchedThrougFetchLoop >= fetchAmount) {
-            console.log('got enough data now, stopping fetchLoop')
             this.setState({
                 dataAmountFetchedThrougFetchLoop: 0
             })
@@ -55,7 +51,6 @@ class InfiniteScrollUtil extends React.Component {
         }
         fetchFunc(idsToFetch, this.controller.signal)
         .then((newData)=>{
-            console.log('newData', newData)
             this.setState((state) => ({
                 data: state.data.concat(newData),
                 fetchStart: state.fetchStart + fetchAmount,
@@ -63,7 +58,6 @@ class InfiniteScrollUtil extends React.Component {
             }))
 
             if (newData.length < fetchAmount && dataAmountFetchedThrougFetchLoop < fetchAmount) {
-                console.log('got less data than fetchAmount, fetching next batch')
                 this.setState((state) => ({
                     dataAmountFetchedThrougFetchLoop: state.dataAmountFetchedThrougFetchLoop + newData.length
                 }))
