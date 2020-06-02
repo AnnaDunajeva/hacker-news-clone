@@ -6,7 +6,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'docs'),
         filename: 'index_bundle.js',
-        publicPath: '/'
+        publicPath: process.env.NODE_ENV === 'production' ? '/hacker-news-clone/' :'/'
     },
     module: {
         rules: [
