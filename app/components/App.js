@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {HashRouter as Router, Route, Switch} from 'react-router-dom'
 import Nav from './Nav.js'
 import {ThemeContext} from '../context/ThemeContext.js'
 import Top from './Top.js'
