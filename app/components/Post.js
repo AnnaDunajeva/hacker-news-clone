@@ -45,7 +45,9 @@ class Post extends React.Component {
                             <PostHeader post={post} fontSize='30px' fontWeight='900'/>
                             <PostMetaInfo post={post}/>
                             {post.text && <p dangerouslySetInnerHTML={{__html: post.text}} className='comment-text'/>}
-                            <Comments post={post} />
+                            {post.descendants
+                                ?<Comments post={post} />
+                                :<p className='comment-text'>No comment yet.</p>}
                         </React.Fragment>
                 }
             </div>

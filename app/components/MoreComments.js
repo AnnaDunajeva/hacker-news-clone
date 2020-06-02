@@ -2,6 +2,7 @@ import React from 'react'
 import Comments from './Comments.js'
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import {ThemeContext} from '../context/ThemeContext.js'
+import ChildComments from './ChildComments';
 
 class MoreComments extends React.Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class MoreComments extends React.Component {
                     }
                 </button>
                 <div className='more-comments'>
-                    {display && <Comments post={this.props.comment} childComment={true}/>}
+                    {display && <ChildComments post={this.props.comment} />}
                 </div>
             </React.Fragment>
         )

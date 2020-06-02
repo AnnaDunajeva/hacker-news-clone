@@ -1,6 +1,7 @@
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Loading from './Loading.js'
+import {removeDeadAndDeleted} from '../utils/api'
 
 class InfiniteScrollUtil extends React.Component {
     constructor(props) {
@@ -11,7 +12,11 @@ class InfiniteScrollUtil extends React.Component {
             hasMore: true,
             fetchStart: 0,
             loading: true,
-            minDataLength: 4
+            minDataLength: 4,
+            dataAmountFetchedThrougFetchLoop: 0 //when we fetch content produced by user, we have only id which can be a
+            //commnet, poll, post and also dead or deleted etc, but want to display only post, so if from ids we have we get
+            //less stuff - meaning some were not valid posts we want, we fetch again, and again util we dont get fetchAmount
+            //of data
         }
         this.fetchData = this.fetchData.bind(this)
         this.controller = new AbortController();
@@ -21,14 +26,26 @@ class InfiniteScrollUtil extends React.Component {
     }
     componentWillUnmount(){
         this.controller.abort();
-      }
+    }
+
     fetchData () {
-        const {fetchStart, minDataLength} = this.state;
+        console.log('running fetch data')
+        const {fetchStart, dataAmountFetchedThrougFetchLoop} = this.state;
         const {fetchAmount, ids, fetchFunc} = this.props;
+        console.log('dataAmountFetchedThrougFetchLoop: ', dataAmountFetchedThrougFetchLoop)
+
         let idsToFetch = []
-        if (fetchStart >= ids.length) {
+        if (fetchStart >= ids.length || fetchStart > 750) { //limit amount of fetching
+            console.log('nothing more to fetch')
             this.setState({
                 hasMore: false
+            })
+            return;
+        }
+        if (dataAmountFetchedThrougFetchLoop >= fetchAmount) {
+            console.log('got enough data now, stopping fetchLoop')
+            this.setState({
+                dataAmountFetchedThrougFetchLoop: 0
             })
             return;
         }
@@ -39,15 +56,21 @@ class InfiniteScrollUtil extends React.Component {
         }
         fetchFunc(idsToFetch, this.controller.signal)
         .then((newData)=>{
-            console.log(newData)
+            console.log('newData', newData)
             this.setState((state) => ({
                 data: state.data.concat(newData),
                 fetchStart: state.fetchStart + fetchAmount,
                 loading: false
             }))
-            if (newData.length < minDataLength) {
+
+            if (newData.length < fetchAmount && dataAmountFetchedThrougFetchLoop < fetchAmount) {
+                console.log('got less data than fetchAmount, fetching next batch')
+                this.setState((state) => ({
+                    dataAmountFetchedThrougFetchLoop: state.dataAmountFetchedThrougFetchLoop + newData.length
+                }))
                 this.fetchData()
             }
+
         })
         .catch((error) => {
             console.warn('Error fetching data: ', error)
@@ -62,21 +85,21 @@ class InfiniteScrollUtil extends React.Component {
         const {text, speed} = this.props;
         return (
             loading 
-                    ?<Loading text={text} speed={speed}/>
-                    :error
-                        ?<div>{error}</div>
-                        :<InfiniteScroll
-                            dataLength={data.length}
-                            next={this.fetchData}
-                            hasMore={hasMore}
-                            loader={<Loading text='Fetching more' speed={200}/>}
-                            endMessage={
-                                <p style={{ textAlign: "center" }}>
-                                    <b>Yay! You have seen it all</b>
-                                </p>}
-                        >
-                        {this.props.children(data)}
-                    </InfiniteScroll>
+                ?<Loading text={text} speed={speed}/>
+                :error
+                    ?<div>{error}</div>
+                    :<InfiniteScroll
+                        dataLength={data.length}
+                        next={this.fetchData}
+                        hasMore={hasMore}
+                        loader={<Loading text='Fetching more' speed={200}/>}
+                        endMessage={
+                            <p style={{ textAlign: "center" }}>
+                                <b>Yay! You have seen it all</b>
+                            </p>}
+                    >
+                    {this.props.children(data)}
+                </InfiniteScroll>
         )
     }
 }

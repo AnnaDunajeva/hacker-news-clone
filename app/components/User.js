@@ -46,31 +46,31 @@ class User extends React.Component {
             <div>
                 {loading
                     ?<Loading text='Fetching user' speed={200}/>
-                        : error
-                            ? <div>{error}</div>
-                            :<React.Fragment>
-                                <div className='row' style={{padding: '60px 0'}}>
-                                    <FaUser size={60}/>
-                                    <div className = 'padding-left'>
-                                        <h1 className='nav-link' style={{fontSize: '38px'}}>{id}</h1>
-                                        <p className='post-meta'>joined {convertTime(created)}, has {karma} karma</p>
-                                    </div>
+                    : error
+                        ? <div>{error}</div>
+                        :<React.Fragment>
+                            <div className='row' style={{padding: '60px 0'}}>
+                                <FaUser size={60}/>
+                                <div className = 'padding-left'>
+                                    <h1 className='nav-link' style={{fontSize: '38px'}}>{id}</h1>
+                                    <p className='post-meta'>joined {convertTime(created)}, has {karma} karma</p>
                                 </div>
-                                {about && <p dangerouslySetInnerHTML={{__html: about}} className='comment-text padding-bottom'/>}
-                                <h2 className='post-link' style={{fontSize: '30px'}}>Posts</h2>
-                                {submitted !== 0 
-                                    ?<InfiniteScrollUtil
-                                        fetchAmount = {50}
-                                        fetchFunc = {fetchPosts}
-                                        ids = {submitted}
-                                        text = {'Fetching stories'}
-                                        speed = {200}
-                                    >
-                                        {(posts)=><PostList posts={posts}/>} 
-                                    </InfiniteScrollUtil> 
-                                    :<p>User have not posted anything yet.</p>
-                                }
-                            </React.Fragment>
+                            </div>
+                            {about && <p dangerouslySetInnerHTML={{__html: about}} className='comment-text padding-bottom'/>}
+                            <h2 className='post-link' style={{fontSize: '30px'}}>Posts</h2>
+                            {submitted !== 0 
+                                ?<InfiniteScrollUtil
+                                    fetchAmount = {50}
+                                    fetchFunc = {fetchPosts}
+                                    ids = {submitted}
+                                    text = {'Fetching stories'}
+                                    speed = {200}
+                                >
+                                    {(posts)=><PostList posts={posts}/>} 
+                                </InfiniteScrollUtil> 
+                                :<p>User has not posted anything yet.</p>
+                            }
+                        </React.Fragment>
                 }
             </div>
         )

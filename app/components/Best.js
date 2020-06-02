@@ -43,7 +43,7 @@ class Best extends React.Component {
                     : error
                         ? <div>{error}</div>
                         :<InfiniteScrollUtil
-                            fetchAmount = {20}
+                            fetchAmount = {50}
                             fetchFunc = {fetchPosts}
                             ids = {ids}
                             text = {'Fetching stories'}

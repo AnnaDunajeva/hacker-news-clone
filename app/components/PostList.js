@@ -9,15 +9,18 @@ class PostList extends React.Component {
         return (
             <ul>
                 {posts.map((post) => 
-                    <li key={uuidv1()} className='post-li'>
-                        <div className='row'>
-                            <div className='score'>{post.score} <br/>{post.score === 1 ?'point':'points'}</div>
-                            <div>
-                                <PostHeader post={post} fontSize='22px' fontWeight='700'/>
-                                <PostMetaInfo post={post}/>
+                    (
+                        !post.deleted && !post.dead &&
+                        <li key={uuidv1()} className='post-li'>
+                            <div className='row'>
+                                <div className='score'>{post.score} <br/>{post.score === 1 ?'point':'points'}</div>
+                                <div>
+                                    <PostHeader post={post} fontSize='22px' fontWeight='700'/>
+                                    <PostMetaInfo post={post}/>
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
+                    )
                 )}
             </ul>
          

@@ -2,47 +2,47 @@ const api = 'https://hacker-news.firebaseio.com/v0/'
 const fetchStories = (type, signal) => {
     const endpoint = window.encodeURI(`${api}${type}stories.json?print=pretty`)
     return fetch(endpoint, {signal})
-            .then((response) => response.json())
-            .then((idsArray) => {
-                if (!idsArray) {
-                    throw new Error(`There was wrror fetching ${type} stories.`)
-                }
-                console.log(signal)
-                return idsArray.slice(0,50)
-            })
-            .then((idsArray) => Promise.all(idsArray.map((id)=>fetchItem(id, signal))))
-            .then((posts)=>removeDeadAndDeleted(onlyStory(posts)))
+        .then((response) => response.json())
+        .then((idsArray) => {
+            if (!idsArray) {
+                throw new Error(`There was wrror fetching ${type} stories.`)
+            }
+            console.log(signal)
+            return idsArray.slice(0,50)
+        })
+        .then((idsArray) => Promise.all(idsArray.map((id)=>fetchItem(id, signal))))
+        .then((posts)=>removeDeadAndDeleted(onlyStory(posts)))
 }
-const fetchStoriesIds = (type, signal) =>{
+const fetchStoriesIds = (type, signal) => {
     const endpoint = window.encodeURI(`${api}${type}stories.json?print=pretty`)
     return fetch(endpoint, {signal})
-            .then((response) => response.json())
-            .then((idsArray) => {
-                if (!idsArray) {
-                    throw new Error(`There was wrror fetching ${type} stories.`)
-                }
-                return idsArray
-            })
+        .then((response) => response.json())
+        .then((idsArray) => {
+            if (!idsArray) {
+                throw new Error(`There was wrror fetching ${type} stories.`)
+            }
+            return idsArray
+        })
 }
 
 const fetchPosts = (ids, signal) => {
     return Promise.all(ids.map((id)=>fetchItem(id, signal)))
-            .then((items) => removeDeadAndDeleted(onlyStory(items)))
+        .then((items) => removeDeadAndDeleted(onlyStory(items)))
 }
 const fetchComments = (ids, signal) => {
     return Promise.all(ids.map((id)=>fetchItem(id, signal)))
-            .then((comments)=>removeDeadAndDeleted(onlyComments(comments)))
+        .then((comments)=>removeDeadAndDeleted(onlyComments(comments)))
 }
 const fetchItem = (item, signal) => {
     const endpoint = window.encodeURI(`${api}item/${item}.json?print=pretty`)
     return fetch(endpoint, {signal})
-            .then((response) => response.json())
-            // .then((item)=> {
-            //     if (!item) {
-            //         throw new Error(`There was wrror with fetching item ${item}.`)
-            //     }
-            //     return item;
-            // })
+        .then((response) => response.json())
+        // .then((item)=> {
+        //     if (!item) {
+        //         throw new Error(`There was wrror with fetching item ${item}.`)
+        //     }
+        //     return item;
+        // })
 }
 const fetchUser = (id, signal) => {
     const endpoint = window.encodeURI(`${api}user/${id}.json?print=pretty`)
